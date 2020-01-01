@@ -77,16 +77,24 @@
                     android:orientation="vertical"
                     android:padding="30dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <EditText
+                        android:id="@+id/drivername"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:hint="Driver Name"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
+                    <EditText
+                        android:id="@+id/drivernumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="number"
+                        android:hint="Driver Mobile"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                             android:id="@+id/chassisNo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:hint="Chassis No" />
-                    </com.google.android.material.textfield.TextInputLayout>
 
                     <Button
                         android:id="@+id/btnChassis"
@@ -99,82 +107,56 @@
                         android:textStyle="bold" />
 
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:id="@+id/instcustomername"
+                        android:hint="গ্রাহকের নাম" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/instcustomername"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="গ্রাহকের নাম" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <com.google.android.material.textfield.TextInputLayout
+                    <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <com.google.android.material.textfield.TextInputEditText
+                        android:layout_height="match_parent"
                             android:id="@+id/instmobilenumber"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:inputType="number"
                             android:hint="মোবাইল নাম্বার" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
 
-                        <com.google.android.material.textfield.TextInputEditText
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                             android:id="@+id/insthoureofbuy"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:inputType="number"
                             android:hint="ঘণ্টাঃ-" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                             android:id="@+id/instdateofbuy"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:focusable="false"
                             android:hint="সার্ভিস চাওয়ার তারিখ ও সময়" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                             android:id="@+id/instdateofinstallation"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:focusable="false"
                             android:hint="সার্ভিস শুরুর তারিখ ও সময়" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
 
-                        <com.google.android.material.textfield.TextInputEditText
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                             android:id="@+id/instdateofendofservice"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:focusable="false"
                             android:hint="সার্ভিস শেষের তারিখ ও সময়" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
 
-                        <com.google.android.material.textfield.TextInputEditText
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                             android:id="@+id/inserviceincome"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:inputType="number"
                             android:hint="সার্ভিস ইনকাম" />
-                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </ScrollView>
         </androidx.cardview.widget.CardView>
