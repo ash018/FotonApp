@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".WarrentyEntry">
 
-    <androidx.appcompat.widget.Toolbar
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -30,14 +30,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="56dp"
                 android:src="@drawable/ic_notification"
                 tools:visibility="invisible" />
 
         </RelativeLayout>
 
-    </androidx.appcompat.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -72,9 +70,6 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -156,7 +151,6 @@
                             android:hint="সার্ভিস শেষের তারিখ ও সময়" />
                 </LinearLayout>
             </ScrollView>
-        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
