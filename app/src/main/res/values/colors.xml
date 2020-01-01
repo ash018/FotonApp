@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="appbar_bg">#FC7005</color>
+    <color name="ui_bg">#F1F1F1</color>
+    <color name="red_pressed">#FBE819</color>
+    <color name="red_normal">#C51A06</color>
+    <color name="blue_pressed">#5A76B1</color>
+    <color name="blue_normal">#516590</color>
+    <color name="orange_normal">#000000</color>
+    <color name="cardview_color">#F1F1F1</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bgcolor">#F8F9F9</color>
+    <color name="selectproductbd">#20b573</color>
+    <color name="btnlogin">#C52A01</color>
+    <color name="colorSilver">#555652</color>
+    <color name="cardview_dark_background">#555652</color>
+
+</resources>

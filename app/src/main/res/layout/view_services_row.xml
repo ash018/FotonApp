@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="6"
+    android:background="#ccc">
+    <TextView
+        android:id="@+id/codeSL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="code"
+        android:padding="2dp"
+        android:gravity="center"
+        android:textColor="#0A0101"/>
+
+    <TextView
+        android:id="@+id/codeTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="code"
+        android:padding="2dp"
+        android:gravity="center"
+        android:textColor="#0A0101"/>
+
+    <TextView
+        android:id="@+id/hourTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="code"
+        android:padding="2dp"
+        android:gravity="center"
+        android:textColor="#0A0101"/>
+
+    <TextView
+        android:id="@+id/amountTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="amount"
+        android:padding="2dp"
+        android:gravity="center"
+        android:textColor="#0A0101"/>
+
+    <TextView
+        android:id="@+id/dateTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="date"
+        android:padding="2dp"
+        android:gravity="center"
+        android:textColor="#0A0101"/>
+
+    <TextView
+        android:id="@+id/ratingTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Rating"
+        android:padding="2dp"
+        android:gravity="center"
+        android:textColor="#0A0101"/>
+
+</LinearLayout>

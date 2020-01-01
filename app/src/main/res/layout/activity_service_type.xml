@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ServiceType">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#092b46"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/mainmenuid"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_menu" />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgjobcard"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:background="@color/selectproductbd" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imgjobcard"
+                android:layout_marginBottom="18dp"
+                android:gravity="center|center_vertical"
+                android:paddingTop="5dp"
+                android:text="সার্ভিস বাছাই করুন"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="30dp">
+
+                    <RadioGroup
+                        android:id="@+id/radiobtngroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/rdoinstallation"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="ইন্সটলেশন "
+                            android:textSize="18sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdoperiodical"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="প্রিওডিক্যাল ফ্রী সার্ভিস"
+                            android:textSize="18sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdowarranty"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="ওয়ারেন্টি সার্ভিস "
+                            android:textSize="18sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdopaid"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="পেইড সার্ভিস"
+                            android:textSize="18sp" />
+
+                        <RadioButton
+                            android:id="@+id/goodwill"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="গুড উইল সার্ভিস"
+                            android:textSize="18sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdopostwcvisit"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="পোস্ট ওয়ারেন্টি গ্রাহক ভিজিট"
+                            android:textSize="18sp" />
+
+
+                    </RadioGroup>
+
+                </LinearLayout>
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/btnprevious"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:background="#3F51B5"
+            android:text="ফিরে যান"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnnext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:background="#4CAF50"
+            android:text="এগিয়ে যান"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
