@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/foton"
     tools:context=".MainActivity">
 
 
@@ -67,7 +66,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@drawable/homebanner"
+            android:background="@drawable/fotn"
             android:gravity="center"
             android:padding="18dp"></LinearLayout>
 

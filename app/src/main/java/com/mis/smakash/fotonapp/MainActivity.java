@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     private String url_all_kiosk = "http://116.68.205.71:4003/fotonservice/api/v0/manageservice/";
     private String url_download_customer = "http://116.68.205.71:4003/fotonservice/api/v0/getuserservice/";
 
+//    private String url_all_kiosk = "http://192.168.101.197:4003/fotonservice/api/v0/manageservice/";
+//    private String url_download_customer = "http://192.168.101.197:4003/fotonservice/api/v0/getuserservice/";
+
     private ImageView imgjobcard, imgjobcardview, imglogout, imgserviceperformance, upload_to_server,
     download_to_server;
 
@@ -205,9 +208,6 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("MotorService", 0);
                 preferences.edit().remove("UserId").commit();
                 logoutUser();
-//                    Intent jorori_intent = new Intent(MainActivity.this, LoginActivity.class);
-//                    startActivity(jorori_intent);
-//                    finish();
             }
         });
         //  }
@@ -321,6 +321,8 @@ public class MainActivity extends AppCompatActivity {
                         String CallTypeId_id = String.valueOf(statusMessageArray.getJSONObject(i).getInt("ServiceCallTypeId_id"));
                         String ServiceDemandDate = statusMessageArray.getJSONObject(i).getString("ServiceDemandDate");
                         String Mobile = statusMessageArray.getJSONObject(i).getString("Mobile");
+
+
 
                         SynchDataRow myC = new SynchDataRow(DateOfInstallation,
                                 VisitDate,

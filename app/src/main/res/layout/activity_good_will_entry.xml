@@ -116,37 +116,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="number"
-                        android:hint="গ্রাহকের নাম"/>
+                        android:hint="মোবাইল নাম্বার"/>
 
                     <EditText
                         android:id="@+id/insthoureofbuy"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint=""/>
+                        android:hint="মাইলেজ"/>
 
                     <EditText
                         android:id="@+id/instdateofbuy"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="গ্রাহকের নাম"/>
+                        android:hint="সার্ভিস চাওয়ার তারিখ ও সময়"/>
 
                     <EditText
                         android:id="@+id/instdateofinstallation"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="গ্রাহকের নাম"/>
+                        android:hint="সার্ভিস শুরুর তারিখ ও সময়"/>
 
                     <EditText
                         android:id="@+id/instdateofendofservice"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="গ্রাহকের নাম"/>
+                        android:hint="সার্ভিস শেষের তারিখ ও সময়"/>
 
                     <EditText
                         android:id="@+id/inserviceincome"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="গ্রাহকের নাম"/>
+                        android:inputType="number"
+                        android:hint="সার্ভিস ইনকাম"/>
 
                 </LinearLayout>
             </ScrollView>

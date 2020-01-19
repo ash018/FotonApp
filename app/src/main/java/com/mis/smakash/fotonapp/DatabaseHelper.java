@@ -57,6 +57,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String KEY_CHASSIS = "service_chassis";
 
+    private static final String KEY_DRIVER_NAME = "driver_name";
+
+    private static final String KEY_DRIVER_NUMBER = "driver_number";
+
     private static final String CREATE_TABLE_SERVICE_MANAGER = "CREATE TABLE " + TABLE_SERVICE_MANAGER
             + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_SERVER_MASTER_ID + " INTEGER DEFAULT 0, "
             + KEY_PRODUCT + " TEXT DEFAULT '0', " + KEY_CALL_TYPE + " TEXT DEFAULT '0', " + KEY_SERVICE_TYPE + " TEXT DEFAULT '0', "
@@ -69,6 +73,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_USER + " TEXT ,"
             + KEY_RATING + " TEXT ,"
             + KEY_CHASSIS + " TEXT ,"
+            + KEY_DRIVER_NAME + " TEXT ,"
+            + KEY_DRIVER_NUMBER + " TEXT ,"
             + KEY_EDITED_AT + " DATETIME DEFAULT (datetime('now','localtime')));";
 
     public DatabaseHelper(Context context) {
@@ -92,7 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean addInstallationService(String productType, String callType, String serviceType,
                                           String customerName, String mobile, String buyingDate,
                                           String houers, String installationDate, String userId,
-                                          String rating, String chassis) {
+                                          String rating, String chassis, String driverName, String driverNumber) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_SERVICE_TYPE, serviceType);
@@ -109,6 +115,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(KEY_USER, userId);
         contentValues.put(KEY_RATING, rating);
         contentValues.put(KEY_CHASSIS, chassis);
+        contentValues.put(KEY_DRIVER_NAME, driverName);
+        contentValues.put(KEY_DRIVER_NUMBER, driverNumber);
         long result = db.insert(TABLE_SERVICE_MANAGER, null, contentValues);
 
         Log.d("userId",userId);
@@ -120,7 +128,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean updateInstallationService(EditServiceRow row, String productType, String callType, String serviceType, String customerName, String mobile, String buyingDate, String houers, String installationDate) {
+    public boolean updateInstallationService(EditServiceRow row, String productType, String callType,
+                                             String serviceType, String customerName, String mobile,
+                                             String buyingDate, String houers, String installationDate,
+                                             String chassisText, String drivername,
+                                             String driverNumber) {
         Date dt = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = sdf.format(dt);
@@ -135,6 +147,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(KEY_BUYING_DATE, formatDate(buyingDate));
         contentValues.put(KEY_RUNNING_HOUER, houers);
         contentValues.put(KEY_INSTALLAION_DATE, formatDate(installationDate));
+        contentValues.put(KEY_CHASSIS, chassisText);
+        contentValues.put(KEY_DRIVER_NAME, drivername);
+        contentValues.put(KEY_DRIVER_NUMBER, driverNumber);
         contentValues.put(KEY_IS_SYNCH, "N");
         contentValues.put(KEY_EDIT_LOG_COUNT, String.valueOf(Integer.parseInt(row.getKEY_EDIT_LOG_COUNT()) + 1));
         contentValues.put(KEY_IS_EDIT, "Y");
@@ -153,7 +168,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean addPerodicEntryService(String productType, String callType, String serviceType,
                                           String customerName, String mobile, String houers,
                                           String buyingDate, String installationDate, String insserviceenddate,
-                                          String userId, String rating, String chassis) {
+                                          String userId, String rating, String chassis, String driverName,
+                                          String driverNumber) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_SERVICE_TYPE, serviceType);
@@ -171,6 +187,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(KEY_USER, userId);
         contentValues.put(KEY_RATING, rating);
         contentValues.put(KEY_CHASSIS, chassis);
+        contentValues.put(KEY_DRIVER_NAME, driverName);
+        contentValues.put(KEY_DRIVER_NUMBER, driverNumber);
         long result = db.insert(TABLE_SERVICE_MANAGER, null, contentValues);
         if (result == -1) {
             return false;
@@ -212,7 +230,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean addWarrentyEntry(String productType, String callType, String serviceType,
                                     String customerName, String mobile, String houers,
                                     String buyingDate, String installationDate, String insserviceenddate,
-                                    String userId, String rating, String chassis) {
+                                    String userId, String rating, String chassis, String driverName, String driverNumber) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_SERVICE_TYPE, serviceType);
@@ -230,6 +248,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(KEY_USER, userId);
         contentValues.put(KEY_RATING, rating);
         contentValues.put(KEY_CHASSIS, chassis);
+        contentValues.put(KEY_DRIVER_NAME, driverName);
+        contentValues.put(KEY_DRIVER_NUMBER, driverNumber);
         long result = db.insert(TABLE_SERVICE_MANAGER, null, contentValues);
         if (result == -1) {
             return false;
@@ -271,7 +291,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean addPaidEntry(String productType, String callType, String serviceType, String customerName,
                                 String mobile, String houers, String buyingDate, String installationDate,
                                 String insserviceenddate, String serincome, String userId, String rating,
-                                String chassis) {
+                                String chassis, String driverName, String driverNumber) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_SERVICE_TYPE, serviceType);
@@ -290,6 +310,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(KEY_USER, userId);
         contentValues.put(KEY_RATING, rating);
         contentValues.put(KEY_CHASSIS, chassis);
+        contentValues.put(KEY_DRIVER_NAME, driverName);
+        contentValues.put(KEY_DRIVER_NUMBER, driverNumber);
         long result = db.insert(TABLE_SERVICE_MANAGER, null, contentValues);
         if (result == -1) {
             return false;
@@ -301,7 +323,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean addGoodWillEntry(String productType, String callType, String serviceType, String customerName,
                                     String mobile, String houers, String buyingDate, String installationDate,
                                     String insserviceenddate, String serincome, String userId, String rating,
-                                    String chassis) {
+                                    String chassis, String driverName, String driverNumber) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_SERVICE_TYPE, serviceType);
@@ -320,6 +342,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(KEY_USER, userId);
         contentValues.put(KEY_RATING, rating);
         contentValues.put(KEY_CHASSIS, chassis);
+        contentValues.put(KEY_DRIVER_NAME, driverName);
+        contentValues.put(KEY_DRIVER_NUMBER, driverNumber);
         long result = db.insert(TABLE_SERVICE_MANAGER, null, contentValues);
         if (result == -1) {
             return false;
@@ -366,7 +390,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean addPostWarrentyEntry(String productType, String callType, String serviceType,
                                         String customerName, String mobile, String houers,
-                                        String buyingDate, String userId, String rating, String chassis) {
+                                        String buyingDate, String userId, String rating, String chassis,
+                                        String driverName, String driverNumber) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_SERVICE_TYPE, serviceType);
@@ -383,6 +408,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(KEY_USER, userId);
         contentValues.put(KEY_RATING, rating);
         contentValues.put(KEY_CHASSIS, chassis);
+        contentValues.put(KEY_DRIVER_NAME, driverName);
+        contentValues.put(KEY_DRIVER_NUMBER, driverNumber);
         long result = db.insert(TABLE_SERVICE_MANAGER, null, contentValues);
         if (result == -1) {
             return false;
@@ -486,8 +513,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String KEY_VISITED_DATE = cursor.getString(cursor.getColumnIndex("visited_date"));
                 String KEY_SERVICE_RATING = cursor.getString(cursor.getColumnIndex("service_rating"));
                 String KEY_CHASSIS = cursor.getString(cursor.getColumnIndex("service_chassis"));
+                String KEY_DRIVER_NAME = cursor.getString(cursor.getColumnIndex("driver_name"));
+                String KEY_DRIVER_NUMBER = cursor.getString(cursor.getColumnIndex("driver_number"));
 
-                row = new EditServiceRow(KEY_ID,
+                row = new EditServiceRow(
+                        KEY_ID,
                         KEY_SERVER_MASTER_ID,
                         KEY_CREATED_AT,
                         KEY_EDITED_AT,
@@ -508,7 +538,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         KEY_SERVICE_INCOME,
                         KEY_VISITED_DATE,
                         KEY_SERVICE_RATING,
-                        KEY_CHASSIS);
+                        KEY_CHASSIS,
+                        KEY_DRIVER_NAME,
+                        KEY_DRIVER_NUMBER
+                );
                 cursor.moveToNext();
             }
         }
@@ -547,8 +580,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String KEY_VISITED_DATE = cursor.getString(cursor.getColumnIndex("visited_date"));
                 String KEY_SERVICE_RATING = cursor.getString(cursor.getColumnIndex("service_rating"));
                 String KEY_CHASSIS = cursor.getString(cursor.getColumnIndex("service_chassis"));
+                String KEY_DRIVER_NAME = cursor.getString(cursor.getColumnIndex("driver_name"));
+                String KEY_DRIVER_NUMBER = cursor.getString(cursor.getColumnIndex("driver_number"));
 
-                EditServiceRow row = new EditServiceRow(KEY_ID,
+                EditServiceRow row = new EditServiceRow(
+                        KEY_ID,
                         KEY_SERVER_MASTER_ID,
                         KEY_CREATED_AT,
                         KEY_EDITED_AT,
@@ -569,7 +605,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         KEY_SERVICE_INCOME,
                         KEY_VISITED_DATE,
                         KEY_SERVICE_RATING,
-                        KEY_CHASSIS);
+                        KEY_CHASSIS,
+                        KEY_DRIVER_NAME,
+                        KEY_DRIVER_NUMBER
+                );
                 allRows.add(row);
                 cursor.moveToNext();
             }

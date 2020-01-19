@@ -40,7 +40,8 @@ import java.util.Map;
 public class PeriodicalEntry extends AppCompatActivity {
     private static ImageView mainmenuid;
     private String serviceProduct = "0", serviceCall = "0", serviceType = "0", freeServiceType = "0";
-    private EditText chassis, instcustomername, instmobilenumber,  insthoureofbuy, instdateofbuy, instdateofinstallation, instdateofendofservice;
+    private EditText chassis, instcustomername, instmobilenumber,  insthoureofbuy, instdateofbuy,
+            instdateofinstallation, instdateofendofservice, drivername, drivernumber;
     private Button btnChassis, btnprevious, btnnext;
     DatePickerDialog datePickerDialog;
     private DatabaseHelper db;
@@ -72,6 +73,8 @@ public class PeriodicalEntry extends AppCompatActivity {
         serviceCall = srvTypeIntent.getStringExtra("ServiceCallType");
         serviceType = srvTypeIntent.getStringExtra("ServiceType");
         isEdit = srvTypeIntent.getStringExtra("Edit");
+        drivername = (EditText) findViewById(R.id.drivername);
+        drivernumber = (EditText) findViewById(R.id.drivernumber);
         chassis = (EditText) findViewById(R.id.chassisNo);
         instcustomername = (EditText) findViewById(R.id.instcustomername);
         instmobilenumber = (EditText) findViewById(R.id.instmobilenumber);
@@ -107,6 +110,8 @@ public class PeriodicalEntry extends AppCompatActivity {
 
         if(isEdit.equalsIgnoreCase("1")){
             row = (EditServiceRow) srvTypeIntent.getSerializableExtra("RowData");
+            drivername.setText(row.getKEY_DRIVER_NAME());
+            drivernumber.setText(row.getKEY_DRIVER_NUMBER());
             chassis.setText(row.getKEY_CHASSIS());
             instcustomername.setText(row.getKEY_CUSTOMER_NAME());
             instmobilenumber.setText(row.getKEY_CUSTOMER_MOBILE());
@@ -201,6 +206,13 @@ public class PeriodicalEntry extends AppCompatActivity {
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                EditText dName;
+                EditText dNumber;
+
+                dName = (EditText) findViewById(R.id.drivername);
+                dNumber = (EditText) findViewById(R.id.drivernumber);
+                String drivername = dName.getText().toString();
+                String drivernumber = dNumber.getText().toString();
                 String customerName = instcustomername.getText().toString();
                 String mobile = instmobilenumber.getText().toString();
                 String hours = insthoureofbuy.getText().toString();
@@ -236,38 +248,50 @@ public class PeriodicalEntry extends AppCompatActivity {
 
                 }
                 else{
-                    if(isEdit.equalsIgnoreCase("1")){
-                        db.updatePerodicEntryService(row, serviceProduct, serviceCall,
-                                serviceType, customerName, mobile,  hours, buyingDate,
-                                installationDate, insServiceEndDate);
-                        Intent nextActivity = new Intent(PeriodicalEntry.this, MainActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("UserId",userId);
-                        nextActivity.putExtras(bundle);
-                        startActivity(nextActivity);
-                        finish();
-                    }
-                    if(isEdit.equalsIgnoreCase("0")){
-//                        db.addPerodicEntryService(serviceProduct, serviceCall,
-//                                serviceType, customerName, mobile,  hours, buyingDate,
-//                                installationDate, insServiceEndDate,userId);
-                        Intent nextActivity = new Intent(PeriodicalEntry.this, ServiceSatisfaction.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("UserId",userId);
-                        bundle.putString("serviceProduct",serviceProduct);
-                        bundle.putString("serviceCall",serviceCall);
-                        bundle.putString("serviceType",serviceType);
-                        bundle.putString("customerName", customerName);
-                        bundle.putString("mobile", mobile);
-                        bundle.putString("hours", hours);
-                        bundle.putString("buyingDate",buyingDate);
-                        bundle.putString("installationDate",installationDate);
-                        bundle.putString("insServiceEndDate", insServiceEndDate);
-                        bundle.putString("chassis", chassisText);
-                        bundle.putString("entryType", "Periodical");
-                        nextActivity.putExtras(bundle);
-                        startActivity(nextActivity);
-                        finish();
+                    if(mobile.length()==11 && drivernumber.length()==11) {
+                        if (isEdit.equalsIgnoreCase("1")) {
+                            db.updatePerodicEntryService(row, serviceProduct, serviceCall,
+                                    serviceType, customerName, mobile, hours, buyingDate,
+                                    installationDate, insServiceEndDate);
+                            Intent nextActivity = new Intent(PeriodicalEntry.this, MainActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("UserId", userId);
+                            nextActivity.putExtras(bundle);
+                            startActivity(nextActivity);
+                            finish();
+                        }
+                        if (isEdit.equalsIgnoreCase("0")) {
+                            Intent nextActivity = new Intent(PeriodicalEntry.this, ServiceSatisfaction.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("UserId", userId);
+                            bundle.putString("serviceProduct", serviceProduct);
+                            bundle.putString("serviceCall", serviceCall);
+                            bundle.putString("serviceType", serviceType);
+                            bundle.putString("customerName", customerName);
+                            bundle.putString("mobile", mobile);
+                            bundle.putString("hours", hours);
+                            bundle.putString("buyingDate", buyingDate);
+                            bundle.putString("installationDate", installationDate);
+                            bundle.putString("insServiceEndDate", insServiceEndDate);
+                            bundle.putString("chassis", chassisText);
+                            bundle.putString("entryType", "Periodical");
+                            bundle.putString("driverName", drivername);
+                            bundle.putString("driverNumber", drivernumber);
+                            nextActivity.putExtras(bundle);
+                            startActivity(nextActivity);
+                            finish();
+                        }
+                    } else {
+//                        Toast.makeText(getApplicationContext(), "Mobile Number must be of 11 digit", Toast.LENGTH_LONG);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PeriodicalEntry.this);
+                        builder.setMessage("Mobile Number must be of 11 digit")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
                     }
                 }
             }
@@ -310,7 +334,7 @@ public class PeriodicalEntry extends AppCompatActivity {
 
                         instcustomername.setText(customerName);
                         instmobilenumber.setText(customerMobile);
-                        //instdateofbuy.setText(finalInvDate);
+                        instdateofbuy.setText(invoiceDate);
 
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(PeriodicalEntry.this);

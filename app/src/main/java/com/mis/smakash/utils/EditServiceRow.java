@@ -31,6 +31,9 @@ public class EditServiceRow implements Serializable {
     public String KEY_RATING;
     public String KEY_CHASSIS;
 
+    public String KEY_DRIVER_NAME;
+    public String KEY_DRIVER_NUMBER;
+
     public EditServiceRow(int KEY_ID,
                           String KEY_SERVER_MASTER_ID,
                           String KEY_CREATED_AT,
@@ -52,7 +55,9 @@ public class EditServiceRow implements Serializable {
                           String KEY_SERVICE_INCOME,
                           String KEY_VISITED_DATE,
                           String KEY_RATING,
-                          String KEY_CHASSIS){
+                          String KEY_CHASSIS,
+                          String KEY_DRIVER_NAME,
+                          String KEY_DRIVER_NUMBER){
                 this.KEY_ID = KEY_ID;
                 this.KEY_SERVER_MASTER_ID = KEY_SERVER_MASTER_ID;
                 this.KEY_CREATED_AT = KEY_CREATED_AT;
@@ -75,6 +80,8 @@ public class EditServiceRow implements Serializable {
                 this.KEY_VISITED_DATE = KEY_VISITED_DATE;
                 this.KEY_RATING = KEY_RATING;
                 this.KEY_CHASSIS =KEY_CHASSIS;
+                this.KEY_DRIVER_NAME = KEY_DRIVER_NAME;
+                this.KEY_DRIVER_NUMBER = KEY_DRIVER_NUMBER;
     }
 
     public int getKEY_ID() {
@@ -247,5 +254,17 @@ public class EditServiceRow implements Serializable {
 
     public void setKEY_CHASSIS() {
         this.KEY_CHASSIS =  KEY_CHASSIS;
+    }
+
+    public String getKEY_DRIVER_NAME() { return KEY_DRIVER_NAME; }
+
+    public void setDRIVER_NAME() {
+        this.KEY_DRIVER_NAME =  KEY_DRIVER_NAME;
+    }
+
+    public String getKEY_DRIVER_NUMBER() { return KEY_DRIVER_NUMBER; }
+
+    public void setDRIVER_NUMBER() {
+        this.KEY_DRIVER_NUMBER =  KEY_DRIVER_NUMBER;
     }
 }

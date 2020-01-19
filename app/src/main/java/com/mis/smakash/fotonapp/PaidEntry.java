@@ -42,7 +42,8 @@ import java.util.Map;
 public class PaidEntry extends AppCompatActivity {
     private static ImageView mainmenuid;
     private String serviceProduct = "0", serviceCall = "0", serviceType = "0";
-    private EditText chassis, instcustomername, instmobilenumber,  insthoureofbuy, instdateofbuy, instdateofinstallation, instdateofendofservice, inserviceincome;
+    private EditText chassis, instcustomername, instmobilenumber,  insthoureofbuy, instdateofbuy, instdateofinstallation, instdateofendofservice, inserviceincome,
+    drivername, drivernumber;
     private Button btnChassis, btnprevious, btnnext;
     DatePickerDialog datePickerDialog;
     private DatabaseHelper db;
@@ -76,6 +77,8 @@ public class PaidEntry extends AppCompatActivity {
         serviceType = srvTypeIntent.getStringExtra("ServiceType");
         isEdit = srvTypeIntent.getStringExtra("Edit");
 
+        drivername = (EditText) findViewById(R.id.drivername);
+        drivernumber = (EditText) findViewById(R.id.drivernumber);
         chassis = (EditText) findViewById(R.id.chassisNo);
         instcustomername = (EditText) findViewById(R.id.instcustomername);
         instmobilenumber = (EditText) findViewById(R.id.instmobilenumber);
@@ -112,6 +115,8 @@ public class PaidEntry extends AppCompatActivity {
 
         if(isEdit.equalsIgnoreCase("1")){
             row = (EditServiceRow) srvTypeIntent.getSerializableExtra("RowData");
+            drivername.setText(row.getKEY_DRIVER_NAME());
+            drivernumber.setText(row.getKEY_DRIVER_NUMBER());
             chassis.setText(row.getKEY_CHASSIS());
             instcustomername.setText(row.getKEY_CUSTOMER_NAME());
             instmobilenumber.setText(row.getKEY_CUSTOMER_MOBILE());
@@ -212,6 +217,13 @@ public class PaidEntry extends AppCompatActivity {
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                EditText dName;
+                EditText dNumber;
+
+                dName = (EditText) findViewById(R.id.drivername);
+                dNumber = (EditText) findViewById(R.id.drivernumber);
+                String drivername = dName.getText().toString();
+                String drivernumber = dNumber.getText().toString();
                 String customerName = instcustomername.getText().toString();
                 String mobile = instmobilenumber.getText().toString();
                 String hours = insthoureofbuy.getText().toString();
@@ -250,41 +262,53 @@ public class PaidEntry extends AppCompatActivity {
                     alert.show();
                 }
                 else{
-                    if(isEdit.equalsIgnoreCase("1")){
-                        db.updatePaidEntry(row, serviceProduct, serviceCall,
-                                serviceType, customerName, mobile,  hours, buyingDate,
-                                installationDate, insServiceEndDate, inservice
-                        );
-                        Intent nextActivity = new Intent(PaidEntry.this, MainActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("UserId",userId);
-                        nextActivity.putExtras(bundle);
-                        startActivity(nextActivity);
-                        finish();
-                    }
-                    if(isEdit.equalsIgnoreCase("0")){
-//                        db.addPaidEntry(serviceProduct, serviceCall,
-//                                serviceType, customerName, mobile,  hours, buyingDate,
-//                                installationDate, insServiceEndDate, inservice, userId
-//                        );
-                        Intent nextActivity = new Intent(PaidEntry.this, ServiceSatisfaction.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("UserId",userId);
-                        bundle.putString("serviceProduct",serviceProduct);
-                        bundle.putString("serviceCall",serviceCall);
-                        bundle.putString("serviceType",serviceType);
-                        bundle.putString("customerName", customerName);
-                        bundle.putString("mobile", mobile);
-                        bundle.putString("hours", hours);
-                        bundle.putString("buyingDate",buyingDate);
-                        bundle.putString("installationDate",installationDate);
-                        bundle.putString("insServiceEndDate", insServiceEndDate);
-                        bundle.putString("inservice", inservice);
-                        bundle.putString("entryType", "Paid");
-                        bundle.putString("chassis", chassisText);
-                        nextActivity.putExtras(bundle);
-                        startActivity(nextActivity);
-                        finish();
+                    if(mobile.length()==11 && drivernumber.length()==11) {
+                        if (isEdit.equalsIgnoreCase("1")) {
+                            db.updatePaidEntry(row, serviceProduct, serviceCall,
+                                    serviceType, customerName, mobile, hours, buyingDate,
+                                    installationDate, insServiceEndDate, inservice
+                            );
+                            Intent nextActivity = new Intent(PaidEntry.this, MainActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("UserId", userId);
+                            nextActivity.putExtras(bundle);
+                            startActivity(nextActivity);
+                            finish();
+                        }
+                        if (isEdit.equalsIgnoreCase("0")) {
+
+                            Intent nextActivity = new Intent(PaidEntry.this, ServiceSatisfaction.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("UserId", userId);
+                            bundle.putString("serviceProduct", serviceProduct);
+                            bundle.putString("serviceCall", serviceCall);
+                            bundle.putString("serviceType", serviceType);
+                            bundle.putString("customerName", customerName);
+                            bundle.putString("mobile", mobile);
+                            bundle.putString("hours", hours);
+                            bundle.putString("buyingDate", buyingDate);
+                            bundle.putString("installationDate", installationDate);
+                            bundle.putString("insServiceEndDate", insServiceEndDate);
+                            bundle.putString("inservice", inservice);
+                            bundle.putString("entryType", "Paid");
+                            bundle.putString("chassis", chassisText);
+                            bundle.putString("driverName", drivername);
+                            bundle.putString("driverNumber", drivernumber);
+                            nextActivity.putExtras(bundle);
+                            startActivity(nextActivity);
+                            finish();
+                        }
+                    } else {
+//                        Toast.makeText(getApplicationContext(), "Mobile Number must be of 11 digit", Toast.LENGTH_LONG);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PaidEntry.this);
+                        builder.setMessage("Mobile Number must be of 11 digit")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
                     }
                 }
             }
@@ -326,7 +350,7 @@ public class PaidEntry extends AppCompatActivity {
 
                         instcustomername.setText(customerName);
                         instmobilenumber.setText(customerMobile);
-                        //instdateofbuy.setText(finalInvDate);
+                        instdateofbuy.setText(invoiceDate);
 
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(PaidEntry.this);

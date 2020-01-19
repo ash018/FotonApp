@@ -22,6 +22,8 @@ public class SynchDataRow {
     public String Mobile;
     public String Chassis;
     public String rating;
+    public String DriverName;
+    public String  DriverNumber;
 
     public SynchDataRow(String DateOfInstallation,
                         String VisitDate,
@@ -63,5 +65,8 @@ public class SynchDataRow {
                 this.ServiceDemandDate = ServiceDemandDate;
                 this.Mobile = Mobile;
                 this.Chassis = Chassis;
+//                this.rating = rating;
+//                this.DriverName =DriverName;
+//                this.DriverNumber = DriverNumber;
     }
 }
